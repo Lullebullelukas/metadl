@@ -134,7 +134,7 @@ PredicateRef pred_ref = PRED_REF.id {: return new PredicateRef(id); :};
 
 Variable variable = VAR_ID.id {: return new Variable(id); :};
 
-EquivalenceDecl equivalence_decl = VAR_ID.id COLON COLON pattern_list DOT {: return new EquivalenceDecl(id,pattern_list); :};
+EquivalenceDecl equivalence_decl = lit_list.heads VAR_ID.id COLON COLON pattern_list DOT {: return new EquivalenceDecl(heads,id,pattern_list); :};
 
 EquivalencePattern equiv_pattern = VAR_ID.id COLON PATTERN.pat {: return new EquivalencePattern(new Opt(),pat,id); :};
 

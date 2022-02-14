@@ -216,6 +216,7 @@ aspect DomainSeparation {
 	// in separation.
 	syn boolean Clause.isLocal();
 	eq Fact.isLocal() = true;
+	eq EquivalenceDecl.isLocal() = true;
 	eq Rule.isLocal() {
 		if (!isASTClause())
 			return true;
@@ -233,6 +234,7 @@ aspect DomainSeparation {
 
 	syn Set<FormalPredicate> Clause.predicateUses();
 	eq Fact.predicateUses() = Collections.emptySet();
+	eq EquivalenceDecl.predicateUses() = Collections.emptySet();
 	eq Rule.predicateUses() {
 		Set<FormalPredicate> res = new HashSet<>();
 		for (CommonLiteral c : getBodys()) {
@@ -307,6 +309,11 @@ aspect DomainSeparation {
 	@Override public Set<String> Fact.localVariables() {
 		return Collections.emptySet();
 	}
+
+	@Override public Set<String> EquivalenceDecl.localVariables() {
+		return Collections.emptySet();
+	}
+	
 	@Override public Set<String> Rule.localVariables() {
 		for (Set<String> varEqSet : domainSignature().equivalenceSets()) {
 			boolean intersectsAllLiterals = true;

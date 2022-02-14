@@ -20,7 +20,7 @@ Equivalence
 EquivalenceDecls come before Clauses in the AnalyzeBlocks
 **/
 
-EquivalenceDecl::= <LABEL> Pattern*;
+EquivalenceDecl:Clause ::= <LABEL> Pattern*;
 
 
 /**

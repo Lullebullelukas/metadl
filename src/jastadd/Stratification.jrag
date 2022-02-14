@@ -62,6 +62,7 @@ aspect Stratification {
 	 */
 	syn Set<Clause> Clause.dependsOn();
 	eq Fact.dependsOn() = Collections.emptySet();
+	eq EquivalenceDecl.dependsOn() = Collections.emptySet();
 	eq Rule.dependsOn() {
 		Set<Clause> deps = new HashSet<>();
 		for (CommonLiteral b : getBodys()) {
@@ -84,6 +85,9 @@ aspect Stratification {
 	}
 	eq Fact.pdgContribution() {
 		return Pair.of(Collections.emptySet(), this);
+	}
+	eq EquivalenceDecl.pdgContribution() {
+		return Pair.of(Collections.emptySet(), this); 
 	}
 
 	Clause contributes pdgContribution() to Program.clauseDependencyGraph();

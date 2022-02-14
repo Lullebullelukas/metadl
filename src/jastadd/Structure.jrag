@@ -109,6 +109,7 @@ aspect Clause {
 	eq Clause.getChild().clause() = this;
 
 	syn boolean CommonClause.isRule();
+	eq EquivalenceDecl.isRule() = false;
 	eq Rule.isRule() = true;
 	eq Fact.isRule() = false;
 	eq AnalyzeBlock.isRule() = false;
@@ -160,7 +161,6 @@ aspect Literal {
 	eq Literal.predicate() = getPredicate();
 
 	inh boolean CommonLiteral.isFact();
-	eq EquivalenceDecl.getChild().isFact() = false;
 	eq Clause.getChild().isFact()		 = false;
 	eq Fact.getHeads(int index).isFact() =	true;
 

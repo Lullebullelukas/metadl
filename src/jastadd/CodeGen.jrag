@@ -183,13 +183,24 @@ aspect CodeGen {
 		return varMap;
 	}
 	eq Fact.evalVariables() = Collections.emptyMap();
-
+	eq EquivalenceDecl.evalVariables() = Collections.emptyMap();
 	/**
 	   Generate a statement sequence for the clause
 	 */
 	syn java.util.List<Control> Clause.genCode(EvaluationContext ctx, boolean isDelta, Set<FormalPredicate> currentStratum);
 
 	eq Fact.genCode(EvaluationContext ctx, boolean isDelta, Set<FormalPredicate> currentStratum) {
+		Tuple t = new Tuple(evalVariables().size());
+		Control currentCont = Control.nop();
+
+		for (CommonLiteral h : getHeadss()) {
+			currentCont = h.genCode(t, ctx, currentCont, Collections.emptySet(), Collections.emptySet(), isDelta);
+		}
+
+		return Collections.singletonList(currentCont);
+	}
+
+	eq EquivalenceDecl.genCode(EvaluationContext ctx, boolean isDelta, Set<FormalPredicate> currentStratum) {
 		Tuple t = new Tuple(evalVariables().size());
 		Control currentCont = Control.nop();
 
