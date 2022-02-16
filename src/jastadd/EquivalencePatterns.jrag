@@ -5,6 +5,8 @@ import org.apache.commons.collections4.multimap.ArrayListValuedHashMap;
 aspect EquivalencePatterns {
 	inh AnalyzeBlock EquivalenceDecl.enclosingAnalyzeBlock();
 
+	inh AnalyzeBlock EquivalencePatternDecl.enclosingAnalyzeBlock();
+
 	syn lazy MultiValuedMap<String, EquivalenceDecl> AnalyzeBlock.equivalenceLabelDecls() {
 		MultiValuedMap<String, EquivalenceDecl> label2decl = new ArrayListValuedHashMap<>();
 		for (EquivalenceDecl eDecl : getEquivalenceDecls()) {
@@ -17,8 +19,64 @@ aspect EquivalencePatterns {
 	syn lazy java.util.List<Clause> EquivalencePatternDecl.getClauses() {
 		/* TODO: Generate a new predicate that represents all the equivalent patterns */
 		
-		return Collections.emptyList();
+		return getClausesHelper();
 	}
+
+	public java.util.List<Clause> EquivalencePatternDecl.getClausesHelper() {
+		Variable bindVar = new Variable("fresh_name");
+		AnalyzeContext ctx = enclosingAnalyzeBlock().getContext();
+		ArrayList<Clause> ret = new ArrayList<>();
+
+		for (ObjLangASTNode n : altParse()) {
+			Literal head = getLiteralHelper(bindVar);
+			Rule r = new Rule(new List<CommonLiteral>().add(head),
+							  new List<CommonLiteral>().addAll(n.literals(ctx, bindVar)));
+			ret.add(r);
+		}
+		return ret;
+	}
+
+	syn String EquivalencePatternDecl.predName() = hash(getPATTERN());
+
+
+	protected static String EquivalencePatternDecl.hash(String s) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			byte[] md5 = md.digest(s.getBytes("UTF-8"));
+			StringBuffer sb = new StringBuffer();
+			// Take the first 6 bytes only, to avoid long predicate names
+			for (int i = 0; i < md5.length; i++) {
+				sb.append(String.format("%02x", md5[i]));
+			}
+			return sb.toString();
+		}
+		catch (Exception e) {}
+		return null;
+	}
+
+
+	protected Literal EquivalencePatternDecl.getLiteralHelper(CommonVariable bindVar) {
+		if (enclosingAnalyzeBlock() == null)
+			return Constructors.literal("ERROR", 0);
+
+		String predName = enclosingAnalyzeBlock().getContext().prefix(predName());
+
+		List<Term> headVars = new List<>();
+		// The assumption is that any parse tree of a pattern contains
+		// the same metavariables
+		ObjLangASTNode n = altParse().iterator().next();
+		if (bindVar != null)
+			headVars.add(bindVar.treeCopy());
+		for (Variable v : n.metavariables())
+			headVars.add(v.treeCopy());
+		// we're using a String hash  here; fingers crossed for no collisions in
+		// the same analyze block
+		Literal head = new Literal(new PredicateSymbol(predName),
+							 headVars);
+		return head;
+	}
+
+	
 
 	@Override public java.util.List<Clause> EquivalencePattern.getClausesHelper(CommonVariable bindVar) {
 		if (bindVar != null) {
@@ -28,7 +86,7 @@ aspect EquivalencePatterns {
 		
 		
 		Collection<EquivalenceDecl> equivalenceDecls = enclosingAnalyzeBlock()
-		.equivalenceLabelDecls().get(getLABEL());
+		.equivalenceLabelDecls().get(getLABEL())
 		
 		AnalyzeContext ctx = enclosingAnalyzeBlock().getContext();
 		ArrayList<Clause> ret = new ArrayList<>();
@@ -70,6 +128,130 @@ aspect EquivalencePatterns {
 		return l;
 	}
 
+
+	syn lazy java.util.List<ObjLangASTNode> EquivalencePatternDecl.altParse() {
+		String srcLang = enclosingAnalyzeBlock().getLang().getSTRING();
+		java.util.List<Category> tokens = new ArrayList<Category>();
+		java.util.List<Symbol> symbols = new ArrayList<Symbol>();
+
+		String[] tokenNames = null;
+		beaver.Scanner scanner = null;
+		ASTBuilder astBuilder = null;
+		java.util.List<Category> startSymbols = null;
+
+
+		switch (srcLang) {
+		case "metadl":
+			scanner = new lang.metadl.pat.ast.LangScanner(new StringReader(getPATTERN()));
+			tokenNames = lang.metadl.pat.ast.PatLangParserSEP.Terminals.NAMES;
+			astBuilder = lang.metadl.pat.ast.ASTBuilder.getInstance();
+			startSymbols = Arrays.asList(lang.metadl.pat.ast.PatLangParserSEP.n_clause,
+										 lang.metadl.pat.ast.PatLangParserSEP.n_common_literal,
+										 lang.metadl.pat.ast.PatLangParserSEP.n_expr);
+			break;
+		case "java8":
+			scanner = new lang.java8.pat.ast.PatLangScanner(new StringReader(getPATTERN()));
+			tokenNames = lang.java8.pat.ast.PatLangParserSEP.Terminals.NAMES;
+			astBuilder = lang.java8.pat.ast.ASTBuilder.getInstance();
+			startSymbols = Arrays.asList(lang.java8.pat.ast.PatLangParserSEP.n_class_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_class_body_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_interface_member_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_block_statement,
+										 lang.java8.pat.ast.PatLangParserSEP.n_expression,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type_parameter,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type_argument,
+										 lang.java8.pat.ast.PatLangParserSEP.n_annotation,
+										 lang.java8.pat.ast.PatLangParserSEP.n_enum_constant);
+			break;
+		}
+
+		Grammar grammar = astBuilder.getGrammar();
+
+		do {
+			beaver.Symbol sym;
+			try {
+				sym = scanner.nextToken();
+			} catch (Exception e) {
+				System.out.println(e);
+				break;
+			}
+			if (sym.getId() != 0 /*EOF*/) {
+				tokens.add(grammar.getCategory(tokenNames[sym.getId()]));
+				symbols.add(sym);
+			} else {
+				break;
+			}
+		} while (true);
+
+		Category[] tokenArray = tokens.toArray(new Category[1]);
+		EarleyParser parser = astBuilder.getParser();
+
+		SPPFTrivialProductionRemover tpr = new SPPFTrivialProductionRemover(grammar) {
+				@Override public boolean isBubleUpChild(Category p, Category c) {
+					if (c.getName().equals("METAVARID"))
+						return true;
+					if (c.getName().equals("GAP"))
+						return true;
+					return false;
+				}
+			};
+
+		LinkedHashSet<ObjLangASTNode> ret = new LinkedHashSet<>();
+
+		SimpleLogger.logger().debug("Parsing pattern " + toString());
+
+		StopWatch parsePatternTimer = StopWatch.createStarted();
+
+		for (Category startSymbol : startSymbols) {
+			SPPFNode root = parser.parse(tokenArray, startSymbol);
+			if (root == null) {
+				continue;
+			}
+
+			{
+				// exclude this debug print from timing
+				parsePatternTimer.suspend();
+				if (SimpleLogger.isDebugMode())
+					Util.dumpParseResult("parse-tree-orig.dot", root, grammar);
+				// continue measuring the time
+				parsePatternTimer.resume();
+			}
+
+			java.util.List<ParseTree> pts = Util.enumerateParseTrees(root, grammar, tpr);
+			for (ParseTree pt : pts) {
+				try {
+					ObjLangASTNode astRoot = (ObjLangASTNode) astBuilder.buildAST(pt, symbols);
+					astRoot.assignIds();
+					ret.add(astRoot);
+					parsePatternTimer.suspend();
+					if (SimpleLogger.isDebugMode()) {
+						Util.dumpParseTree("parse-tree" + pt.hashCode() + ".dot", pt);
+						Util.dumpParseResult("parse-graph" + root.hashCode() + ".dot", root, grammar);
+						OutputStream ps = new ByteArrayOutputStream();
+						astRoot.debugPrint(new PrintStream(ps));
+						SimpleLogger.logger().debug(ps.toString());
+					}
+					parsePatternTimer.resume();
+				} catch (Exception e) {
+					Util.dumpParseTree("parse-tree.dot", pt);
+					Util.dumpParseResult("parse-graph.dot", root, grammar);
+					throw e;
+				}
+			}
+		}
+
+		parsePatternTimer.stop();
+		SimpleLogger.logger().time("Parsing pattern " + toString() + ": " + parsePatternTimer.getTime() + "ms");
+
+		if (ret.isEmpty()) {
+			logger().error("Error while parsing pattern: " + getPATTERN());
+			throw new RuntimeException("Error while parsing pattern");
+		}
+
+		return new ArrayList(ret);
+	}
 
 	/* For now, don't allow multiple equivalence declarations to share the same label */
 	EquivalenceDecl contributes new SemanticError(this, "Multiple equivalence declarations with the same label: " + this.getLABEL())
