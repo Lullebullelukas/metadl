@@ -16,9 +16,29 @@ aspect EquivalencePatterns {
 		return label2decl;
 	}
 
+	syn lazy java.util.List<Clause> EquivalenceDecl.getClauses() {
+		return getClausesHelper();
+	}
+
+	public java.util.List<Clause> EquivalenceDecl.getClausesHelper() {
+		ArrayList<Clause> ret = new ArrayList<>();
+		Variable var = new Variable("fake");
+		List<Term> headVars = new List<>();
+		headVars.add(var);
+
+		for (EquivalencePatternDecl epd: getEquivalencePatternDecls()) {
+			//TODO make altparse() static and take a pattern.....
+			Literal head = new Literal(new PredicateSymbol("EQUIV_" + getLABEL()),headVars);
+			Rule r = new Rule(new List<CommonLiteral>().add(head),
+							  new List<CommonLiteral>().add(epd.getLiteralHelper(null)));
+			ret.add(r);
+		}
+		
+		return ret;
+	}
+
 	syn lazy java.util.List<Clause> EquivalencePatternDecl.getClauses() {
 		/* TODO: Generate a new predicate that represents all the equivalent patterns */
-		
 		return getClausesHelper();
 	}
 

@@ -28,9 +28,7 @@ aspect PatternLang {
 	eq Program.getCommonClause().enclosingAnalyzeBlock() = null;
 	eq AnalyzeBlock.getClause().enclosingAnalyzeBlock() = this;
 	eq AnalyzeBlock.getExpandedClause().enclosingAnalyzeBlock() = this;
-	//??? Needed?
 	eq AnalyzeBlock.getEquivalenceDecl().enclosingAnalyzeBlock() = this;
-	//?????
 
     syn String AnalyzeBlock.getScopePrefix() = "A_" + getLine(getStart()) + "_" + getColumn(getStart()) + "_";
 	syn AnalyzeContext AnalyzeBlock.getContext() {
@@ -57,10 +55,12 @@ aspect PatternLang {
 			cls.addAll(p.getClauses());
 		}
 		for (EquivalenceDecl eq : getEquivalenceDecls()) {
+			cls.addAll(eq.getClauses());
 			for(EquivalencePatternDecl eqp : eq.getEquivalencePatternDecls()) {
 				cls.addAll(eqp.getClauses());
 			}
 		}
+
 		return cls;
 	}
 
