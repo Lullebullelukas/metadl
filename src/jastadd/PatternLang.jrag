@@ -56,8 +56,14 @@ aspect PatternLang {
 		for (Pattern p : patterns()) {
 			cls.addAll(p.getClauses());
 		}
+		for (EquivalenceDecl eq : getEquivalenceDecls()) {
+			for(EquivalencePatternDecl eqp : eq.getEquivalencePatternDecls()) {
+				cls.addAll(eqp.getClauses());
+			}
+		}
 		return cls;
 	}
+
 
 	AnalyzeBlock contributes nta getExpandedClauses() to Program.predicateSymbols();
 	Pattern contributes nta getLiteral() to Program.predicateSymbols();

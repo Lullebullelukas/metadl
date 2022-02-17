@@ -23,7 +23,7 @@ aspect EquivalencePatterns {
 	}
 
 	public java.util.List<Clause> EquivalencePatternDecl.getClausesHelper() {
-		Variable bindVar = new Variable("fresh_name");
+		Variable bindVar = new Variable("_root");
 		AnalyzeContext ctx = enclosingAnalyzeBlock().getContext();
 		ArrayList<Clause> ret = new ArrayList<>();
 
@@ -86,7 +86,7 @@ aspect EquivalencePatterns {
 		
 		
 		Collection<EquivalenceDecl> equivalenceDecls = enclosingAnalyzeBlock()
-		.equivalenceLabelDecls().get(getLABEL())
+		.equivalenceLabelDecls().get(getLABEL());
 		
 		AnalyzeContext ctx = enclosingAnalyzeBlock().getContext();
 		ArrayList<Clause> ret = new ArrayList<>();
