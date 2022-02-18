@@ -22,15 +22,18 @@ aspect EquivalencePatterns {
 
 	public java.util.List<Clause> EquivalenceDecl.getClausesHelper() {
 		ArrayList<Clause> ret = new ArrayList<>();
-		Variable var = new Variable("fake");
-		List<Term> headVars = new List<>();
-		headVars.add(var);
 
 		for (EquivalencePatternDecl epd: getEquivalencePatternDecls()) {
 			//TODO make altparse() static and take a pattern.....
-			Literal head = new Literal(new PredicateSymbol("EQUIV_" + getLABEL()),headVars);
+			Literal body = epd.getLiteralHelper(new Variable("_root"));
+			List<Term> vars = new List<>();
+			for (String s : body.variableNames()) {
+				vars.add(new Variable(s));
+			}
+			Literal head = new Literal(new PredicateSymbol("EQUIV_" + getLABEL()),vars);
+
 			Rule r = new Rule(new List<CommonLiteral>().add(head),
-							  new List<CommonLiteral>().add(epd.getLiteralHelper(null)));
+							  new List<CommonLiteral>().add(body));
 			ret.add(r);
 		}
 		
@@ -148,6 +151,9 @@ aspect EquivalencePatterns {
 		return l;
 	}
 
+	static java.util.List<ObjLangASTNode> ASTNode.patternParse(String s) {
+		//do altparse things
+	}
 
 	syn lazy java.util.List<ObjLangASTNode> EquivalencePatternDecl.altParse() {
 		String srcLang = enclosingAnalyzeBlock().getLang().getSTRING();
