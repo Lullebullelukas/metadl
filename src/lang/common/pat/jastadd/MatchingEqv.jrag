@@ -1,0 +1,44 @@
+aspect MatchingEqv {
+    public class MatchEqv {
+        //smallRoot is root of AST for equivalencePatternDecl and bigRoot is root of AST from the program we want to match against the equiv
+        public Map<ASTNode<ASTNode>, ASTNode<ASTNode>> match(ASTNode<ASTNode> smallRoot,ASTNode<ASTNode> bigRoot) {
+            HashMap<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = new HashMap<ASTNode<ASTNode>, ASTNode<ASTNode>>();
+            //if we have a meta variable then match instantly
+            //some shortcuts could probably be taken if we know that numChild differs
+
+            System.out.println("Match is running");
+            if (matchHelper(smallRoot, bigRoot,matchMap)) {
+               matchMap.put(smallRoot, bigRoot);
+               return matchMap;
+            } else {
+               return Collections.emptyMap();
+            }
+
+        }
+
+
+        public boolean matchHelper(ASTNode<ASTNode> smallNode,ASTNode<ASTNode> bigNode, Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap) {
+            //below checks equivalence for bigRoot node and smallRoot node,
+            if (!(smallNode.getClass().equals(bigNode.getClass()) || smallNode.isMetaVar() || bigNode.isMetaVar())) {
+                //no match
+                return false;
+            }  
+            int smallChildren = smallNode.getNumChild();
+            int bigChildren = bigNode.getNumChild();
+
+            if (bigChildren != smallChildren) {
+                return false;
+            }
+
+            for(int i = 0; i < bigChildren ; i++) {
+                if(matchHelper(smallNode.getChild(i), bigNode.getChild(i),matchMap)) {
+                    //add it to the map??
+                    matchMap.put(smallNode, bigNode);
+                } else {
+                    return false;
+                }
+            }
+            return true;
+        } 
+    }
+} 

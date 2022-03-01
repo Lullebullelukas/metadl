@@ -3,9 +3,7 @@ IMPORT('P, "extension/javafiles", "*.java").
 P("", "") :- P("", "").
 
 java('P) {
-    myLabel :: <: `x + 1 :> ~ <: 1 + `x :>.
-    # myLabel :: <: `x + `y :> ~ <: `y + `x :>.
-
-    NewArray(l, c, file) :- myLabel : <: new `t[] { .. } :>, SRC(e, l, c, _, _, file).
+    commute_mult :: <: `term1 * `term2 :> ~ <: `term2 * `term1:>.
+    P_three_times_two("three_times_two") :- commute_mult : <: 3 * 2 :>.
     Q(0) :- Q(0).
 }

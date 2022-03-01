@@ -428,4 +428,52 @@ aspect PatternToDatalog {
 		vars.add(new lang.ast.Variable(getID()));
 		return vars;
 	}
+
+	@Override public void MatchNode.literals2(AnalyzeContext ctx, lang.ast.CommonVariable root,
+			java.util.List<lang.ast.CommonLiteral> lits) {
+		
+		ArrayList<lang.ast.Term> vars = new ArrayList<>();
+		
+		//add root vars
+		vars.add(new lang.ast.Variable(varName()));
+		for (int i = 0; i < getNumChild(); ++i) {
+			ASTNode child = getChild(i);
+			vars.add(new lang.ast.Variable(child.varName()));
+			child.literals2(ctx, null, lits);				
+		}
+		lits.add(literal("EQUIV" + label(), var(varName()), vars));
+		return;
+	}
+
+
+	
+
+	class MatchNode extends ASTNode<ASTNode> {
+		private ASTNode<ASTNode> referenceNode;
+		private String label;
+		
+		public MatchNode(String label){
+			super();
+			this.label = label;
+		} 
+
+		public String label() {
+			return label;
+		}
+
+
+		// @Override public void literals2(AnalyzeContext ctx, lang.ast.CommonVariable root,
+		// 	java.util.List<lang.ast.CommonLiteral> lits) {
+
+		// 		List<Variable> vars = new List<>();
+		// 		//add root vars
+		// 		for (int i = 0; i < getNumChild(); ++i) {
+		// 			ASTNode child = getChild(i);
+		// 			vars.add(variable(Child.varName));
+		// 			child.literals2(ctx, null, lits);				
+		// 		}
+		// 		lits.add(literal("EQUIV" + label, var(varName()), vars));
+		// 		return;
+		// }
+	}
 }
