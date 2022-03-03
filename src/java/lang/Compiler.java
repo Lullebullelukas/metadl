@@ -22,11 +22,16 @@ import incremental.IncrementalDriver;
 import incremental.ProgramSplit;
 import lang.CmdLineOpts.Action;
 import lang.ast.AnalyzeBlock;
+import lang.ast.CommonClause;
+import lang.ast.EquivalencePattern;
+import lang.ast.EquivalencePatternDecl;
 import lang.ast.FormalPredicate;
 import lang.ast.Program;
+import lang.ast.Rule;
 import lang.ast.SoufflePrettyPrinter;
 import lang.ast.StandardPrettyPrinter;
 import lang.ast.TypeError;
+import lang.cons.ObjLangASTNode;
 import lang.ast.SemanticError;
 import lang.io.FileUtil;
 import lang.io.SimpleLogger;
@@ -157,6 +162,42 @@ public class Compiler {
 	public static Program run(CmdLineOpts opts) {
 		try {
 			Program prog = parseProgram(opts);
+			
+			for (CommonClause x :prog.getCommonClauses()) {
+				System.out.println(x.getClass());
+				if (x instanceof AnalyzeBlock) {
+					System.out.println("Inside analyzeblock");
+					lang.ast.List<lang.ast.Clause> list = ((AnalyzeBlock) x).getClauses();
+					lang.ast.EquivalencePattern literal = null;
+					for(lang.ast.Clause clause : list) {
+						if(clause instanceof Rule) {
+							lang.ast.List<lang.ast.CommonLiteral> bodyList = ((Rule)clause).getBodyList();
+							for(lang.ast.CommonLiteral cl : bodyList) {
+								if(cl instanceof EquivalencePattern) {
+									//finds a pattern soley for testing
+									literal = (lang.ast.EquivalencePattern) cl;
+								}
+								//todo change this
+								
+
+							}
+						}
+					}
+
+					
+					lang.ast.EquivalenceDecl decl = ((AnalyzeBlock) x).getEquivalenceDecl(0);
+					for(ObjLangASTNode bigTree : literal.altParse()) {
+						for (EquivalencePatternDecl pat : decl.getEquivalencePatternDeclList()) {
+							
+							for(ObjLangASTNode smallTree : pat.altParse()) {
+							
+								lang.java8.pat.ast.MatchEqv.match((lang.java8.pat.ast.ASTNode<lang.java8.pat.ast.ASTNode>) smallTree,(lang.java8.pat.ast.ASTNode<lang.java8.pat.ast.ASTNode>) bigTree);
+							}
+						}
+					}	
+
+				}
+			}
 
 			switch (opts.getAction()) {
 			case EVAL_INTERNAL:

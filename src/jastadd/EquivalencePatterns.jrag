@@ -120,6 +120,7 @@ aspect EquivalencePatterns {
 							  new List<CommonLiteral>().addAll(n.literals(ctx,bindVar)));
 			ret.add(r);
 		}
+
 		/*
 		  TODO: generate clauses for this pattern
 		*/
@@ -138,7 +139,9 @@ aspect EquivalencePatterns {
 		/*
 		  TODO: generate a literal that represents the equivalence
 		 */
-	
+		
+
+		
 		return new Literal(new PredicateSymbol("Equiv_Pattern_" + getLABEL()), 
 							headVars);
 	}
@@ -151,9 +154,130 @@ aspect EquivalencePatterns {
 		return l;
 	}
 
-	// static java.util.List<ObjLangASTNode> ASTNode.patternParse(String s) {
-	// 	//do altparse things
-	// }
+	//Static alt parse, kindof
+	static java.util.List<ObjLangASTNode> ASTNode.patternParse(String pattern, String srcLang) {
+		//do altparse things
+		java.util.List<Category> tokens = new ArrayList<Category>();
+		java.util.List<Symbol> symbols = new ArrayList<Symbol>();
+
+		String[] tokenNames = null;
+		beaver.Scanner scanner = null;
+		ASTBuilder astBuilder = null;
+		java.util.List<Category> startSymbols = null;
+
+
+		switch (srcLang) {
+		case "metadl":
+			scanner = new lang.metadl.pat.ast.LangScanner(new StringReader(pattern));
+			tokenNames = lang.metadl.pat.ast.PatLangParserSEP.Terminals.NAMES;
+			astBuilder = lang.metadl.pat.ast.ASTBuilder.getInstance();
+			startSymbols = Arrays.asList(lang.metadl.pat.ast.PatLangParserSEP.n_clause,
+										 lang.metadl.pat.ast.PatLangParserSEP.n_common_literal,
+										 lang.metadl.pat.ast.PatLangParserSEP.n_expr);
+			break;
+		case "java8":
+			scanner = new lang.java8.pat.ast.PatLangScanner(new StringReader(pattern));
+			tokenNames = lang.java8.pat.ast.PatLangParserSEP.Terminals.NAMES;
+			astBuilder = lang.java8.pat.ast.ASTBuilder.getInstance();
+			startSymbols = Arrays.asList(lang.java8.pat.ast.PatLangParserSEP.n_class_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_class_body_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_interface_member_declaration,
+										 lang.java8.pat.ast.PatLangParserSEP.n_block_statement,
+										 lang.java8.pat.ast.PatLangParserSEP.n_expression,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type_parameter,
+										 lang.java8.pat.ast.PatLangParserSEP.n_type_argument,
+										 lang.java8.pat.ast.PatLangParserSEP.n_annotation,
+										 lang.java8.pat.ast.PatLangParserSEP.n_enum_constant);
+			break;
+		}
+
+		Grammar grammar = astBuilder.getGrammar();
+
+		do {
+			beaver.Symbol sym;
+			try {
+				sym = scanner.nextToken();
+			} catch (Exception e) {
+				System.out.println(e);
+				break;
+			}
+			if (sym.getId() != 0 /*EOF*/) {
+				tokens.add(grammar.getCategory(tokenNames[sym.getId()]));
+				symbols.add(sym);
+			} else {
+				break;
+			}
+		} while (true);
+
+		Category[] tokenArray = tokens.toArray(new Category[1]);
+		EarleyParser parser = astBuilder.getParser();
+
+		SPPFTrivialProductionRemover tpr = new SPPFTrivialProductionRemover(grammar) {
+				@Override public boolean isBubleUpChild(Category p, Category c) {
+					if (c.getName().equals("METAVARID"))
+						return true;
+					if (c.getName().equals("GAP"))
+						return true;
+					return false;
+				}
+			};
+
+		LinkedHashSet<ObjLangASTNode> ret = new LinkedHashSet<>();
+
+		SimpleLogger.logger().debug("Parsing pattern " + pattern);
+
+		StopWatch parsePatternTimer = StopWatch.createStarted();
+
+		for (Category startSymbol : startSymbols) {
+			SPPFNode root = parser.parse(tokenArray, startSymbol);
+			if (root == null) {
+				continue;
+			}
+
+			{
+				// exclude this debug print from timing
+				parsePatternTimer.suspend();
+				if (SimpleLogger.isDebugMode())
+					Util.dumpParseResult("parse-tree-orig.dot", root, grammar);
+				// continue measuring the time
+				parsePatternTimer.resume();
+			}
+
+			java.util.List<ParseTree> pts = Util.enumerateParseTrees(root, grammar, tpr);
+			for (ParseTree pt : pts) {
+				try {
+					ObjLangASTNode astRoot = (ObjLangASTNode) astBuilder.buildAST(pt, symbols);
+					astRoot.assignIds();
+					ret.add(astRoot);
+					parsePatternTimer.suspend();
+					if (SimpleLogger.isDebugMode()) {
+						Util.dumpParseTree("parse-tree" + pt.hashCode() + ".dot", pt);
+						Util.dumpParseResult("parse-graph" + root.hashCode() + ".dot", root, grammar);
+						OutputStream ps = new ByteArrayOutputStream();
+						astRoot.debugPrint(new PrintStream(ps));
+						SimpleLogger.logger().debug(ps.toString());
+					}
+					parsePatternTimer.resume();
+				} catch (Exception e) {
+					Util.dumpParseTree("parse-tree.dot", pt);
+					Util.dumpParseResult("parse-graph.dot", root, grammar);
+					throw e;
+				}
+			}
+		}
+
+		parsePatternTimer.stop();
+		SimpleLogger.logger().time("Parsing pattern " + pattern + ": " + parsePatternTimer.getTime() + "ms");
+
+		if (ret.isEmpty()) {
+			logger().error("Error while parsing pattern: " + pattern);
+			throw new RuntimeException("Error while parsing pattern");
+		}
+
+		return new ArrayList(ret);
+	}
 
 	syn lazy java.util.List<ObjLangASTNode> EquivalencePattern.altParse() {
 		String srcLang = enclosingAnalyzeBlock().getLang().getSTRING();

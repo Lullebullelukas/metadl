@@ -1,14 +1,17 @@
 aspect MatchingEqv {
     public class MatchEqv {
         //smallRoot is root of AST for equivalencePatternDecl and bigRoot is root of AST from the program we want to match against the equiv
-        public Map<ASTNode<ASTNode>, ASTNode<ASTNode>> match(ASTNode<ASTNode> smallRoot,ASTNode<ASTNode> bigRoot) {
+        public static Map<ASTNode<ASTNode>, ASTNode<ASTNode>> match(ASTNode<ASTNode> smallRoot, ASTNode<ASTNode> bigRoot) {
             HashMap<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = new HashMap<ASTNode<ASTNode>, ASTNode<ASTNode>>();
             //if we have a meta variable then match instantly
             //some shortcuts could probably be taken if we know that numChild differs
 
             System.out.println("Match is running");
-            if (matchHelper(smallRoot, bigRoot,matchMap)) {
+            smallRoot.debugPrint(System.out);
+            bigRoot.debugPrint(System.out);
+            if (matchHelper(smallRoot, bigRoot, matchMap)) {
                matchMap.put(smallRoot, bigRoot);
+               System.out.println(matchMap);
                return matchMap;
             } else {
                return Collections.emptyMap();
@@ -17,18 +20,28 @@ aspect MatchingEqv {
         }
 
 
-        public boolean matchHelper(ASTNode<ASTNode> smallNode,ASTNode<ASTNode> bigNode, Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap) {
+        public static boolean matchHelper(ASTNode<ASTNode> smallNode,ASTNode<ASTNode> bigNode, Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap) {
             //below checks equivalence for bigRoot node and smallRoot node,
-            if (!(smallNode.getClass().equals(bigNode.getClass()) || smallNode.isMetaVar() || bigNode.isMetaVar())) {
+            //metavars in bigTree ignored for now
+            if (!(smallNode.getClass().equals(bigNode.getClass()) || smallNode.isMetaVar() )) {
                 //no match
+                System.out.println(smallNode.getClass());
+                System.out.println(bigNode.getClass());
                 return false;
             }  
-            int smallChildren = smallNode.getNumChild();
+            // int smallChildren = smallNode.getNumChild();
             int bigChildren = bigNode.getNumChild();
 
-            if (bigChildren != smallChildren) {
-                return false;
-            }
+            // System.out.println("big children: " + bigChildren);
+            // System.out.println("small childern: " + smallChildren);
+
+
+            //meta variables have a wrapper making the children amount not be what we want it to. Maybe we can get do a try catch instead
+            //to make sure we don't get index out of bounds.
+            // if (bigChildren != smallChildren) {
+            //     System.out.println("B");
+            //     return false;
+            // }
 
             for(int i = 0; i < bigChildren ; i++) {
                 if(matchHelper(smallNode.getChild(i), bigNode.getChild(i),matchMap)) {
@@ -38,6 +51,9 @@ aspect MatchingEqv {
                     return false;
                 }
             }
+            //if we get passed the above loop then we are in a bigLeaf that is equal to the current smallLeaf. Extra thought needs to be
+            //put into what part of the meta vars we want to map. The wrapper or the child? 
+            matchMap.put(smallNode, bigNode);
             return true;
         } 
     }
