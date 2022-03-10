@@ -163,41 +163,41 @@ public class Compiler {
 		try {
 			Program prog = parseProgram(opts);
 			
-			for (CommonClause x :prog.getCommonClauses()) {
-				System.out.println(x.getClass());
-				if (x instanceof AnalyzeBlock) {
-					System.out.println("Inside analyzeblock");
-					lang.ast.List<lang.ast.Clause> list = ((AnalyzeBlock) x).getClauses();
-					lang.ast.EquivalencePattern literal = null;
-					for(lang.ast.Clause clause : list) {
-						if(clause instanceof Rule) {
-							lang.ast.List<lang.ast.CommonLiteral> bodyList = ((Rule)clause).getBodyList();
-							for(lang.ast.CommonLiteral cl : bodyList) {
-								if(cl instanceof EquivalencePattern) {
-									//finds a pattern soley for testing
-									literal = (lang.ast.EquivalencePattern) cl;
-								}
-								//todo change this
+			// for (CommonClause x :prog.getCommonClauses()) {
+			// 	System.out.println(x.getClass());
+			// 	if (x instanceof AnalyzeBlock) {
+			// 		System.out.println("Inside analyzeblock");
+			// 		lang.ast.List<lang.ast.Clause> list = ((AnalyzeBlock) x).getClauses();
+			// 		lang.ast.EquivalencePattern literal = null;
+			// 		for(lang.ast.Clause clause : list) {
+			// 			if(clause instanceof Rule) {
+			// 				lang.ast.List<lang.ast.CommonLiteral> bodyList = ((Rule)clause).getBodyList();
+			// 				for(lang.ast.CommonLiteral cl : bodyList) {
+			// 					if(cl instanceof EquivalencePattern) {
+			// 						//finds a pattern soley for testing
+			// 						literal = (lang.ast.EquivalencePattern) cl;
+			// 					}
+			// 					//todo change this
 								
 
-							}
-						}
-					}
+			// 				}
+			// 			}
+			// 		}
 
 					
-					lang.ast.EquivalenceDecl decl = ((AnalyzeBlock) x).getEquivalenceDecl(0);
-					for(ObjLangASTNode bigTree : literal.altParse()) {
-						for (EquivalencePatternDecl pat : decl.getEquivalencePatternDeclList()) {
+			// 		lang.ast.EquivalenceDecl decl = ((AnalyzeBlock) x).getEquivalenceDecl(0);
+			// 		for(ObjLangASTNode bigTree : literal.altParse()) {
+			// 			for (EquivalencePatternDecl pat : decl.getEquivalencePatternDeclList()) {
 							
-							for(ObjLangASTNode smallTree : pat.altParse()) {
+			// 				for(ObjLangASTNode smallTree : pat.altParse()) {
 							
-								lang.java8.pat.ast.MatchEqv.match((lang.java8.pat.ast.ASTNode<lang.java8.pat.ast.ASTNode>) smallTree,(lang.java8.pat.ast.ASTNode<lang.java8.pat.ast.ASTNode>) bigTree);
-							}
-						}
-					}	
+			// 					lang.java8.pat.ast.MatchEqv.match((lang.java8.pat.ast.ASTNode<lang.java8.pat.ast.ASTNode>) smallTree,(lang.java8.pat.ast.ASTNode<lang.java8.pat.ast.ASTNode>) bigTree);
+			// 				}
+			// 			}
+			// 		}	
 
-				}
-			}
+			// 	}
+			// }
 
 			switch (opts.getAction()) {
 			case EVAL_INTERNAL:

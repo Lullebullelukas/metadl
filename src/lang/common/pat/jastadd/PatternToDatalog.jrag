@@ -4,6 +4,9 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Collection;
+
+import java.util.Iterator;
 import lang.cons.ObjLangASTNode;
 import java.lang.reflect.Method;
 import java.lang.ReflectiveOperationException;
@@ -13,6 +16,11 @@ import java.util.Arrays;
 import java.io.PrintStream;
 import static lang.ast.Constructors.*;
 import org.apache.commons.lang3.mutable.MutableInt;
+
+import lang.ast.EquivalencePattern;
+import lang.ast.EquivalencePatternDecl;
+import lang.ast.EquivalenceDecl;
+
 
 aspect PatternToDatalog {
 
@@ -402,6 +410,34 @@ aspect PatternToDatalog {
 		return list;
 	}
 
+	syn lazy ArrayList<lang.ast.CommonLiteral> ASTNode.equivLiterals(AnalyzeContext ctx, lang.ast.CommonVariable oldRoot, Collection<EquivalenceDecl> equivDecls) {
+		// An add-hoc way of implementing parameterized collection attributes
+		ArrayList<lang.ast.CommonLiteral> list = new ArrayList<>();
+		//look into root and match?
+
+		//equivDecls go into decl and pass it to match (first pattern?)
+		//iterator of some sort
+		Iterator<EquivalenceDecl> iter = equivDecls.iterator();
+		EquivalencePatternDecl patternRoot;
+		if(iter.hasNext()) {
+			patternRoot = iter.next().getEquivalencePatternDecl(0);
+		}
+
+		java.util.List<ObjLangASTNode> nodeList =  lang.ast.ASTNode.patternParse(patternRoot.getPATTERN(),"java8");
+		//gets us a map between patternRoot and root
+		Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>)nodeList.get(0) , oldRoot); 
+		//With that map transform the root to MatchNode
+
+		//MatchNode newRoot = appropriate children from map (K,V)
+		//traverse old root and replace where K has a V
+		int numChild = oldRoot.getNumChild(); 
+		for(int i = 0; i < numChild; i++) {
+		}
+
+		literals2(ctx, oldRoot, list);
+		return list;
+	}
+
 	syn TreeSet<lang.ast.Variable> ASTNode.metavariables() {
 		TreeSet<lang.ast.Variable> vars = new TreeSet<>(lang.ast.Term.termComparator);
 		for (ASTNode c : astChildren()) {
@@ -449,7 +485,7 @@ aspect PatternToDatalog {
 	
 
 	class MatchNode extends ASTNode<ASTNode> {
-		private ASTNode<ASTNode> referenceNode;
+	//	private ASTNode<ASTNode> referenceNode; probably needed?
 		private String label;
 		
 		public MatchNode(String label){

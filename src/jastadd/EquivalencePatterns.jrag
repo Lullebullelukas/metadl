@@ -107,7 +107,7 @@ aspect EquivalencePatterns {
 		}
 
 		
-		
+		//assume there is only one
 		Collection<EquivalenceDecl> equivalenceDecls = enclosingAnalyzeBlock()
 		.equivalenceLabelDecls().get(getLABEL());
 		
@@ -117,7 +117,7 @@ aspect EquivalencePatterns {
 		for (ObjLangASTNode n : altParse()) {
 			Literal head = getLiteralHelper(bindVar);
 			Rule r = new Rule(new List<CommonLiteral>().add(head),
-							  new List<CommonLiteral>().addAll(n.literals(ctx,bindVar)));
+							  new List<CommonLiteral>().addAll(n.equivLiterals(ctx,bindVar,equivalenceDecls)));
 			ret.add(r);
 		}
 
@@ -155,7 +155,7 @@ aspect EquivalencePatterns {
 	}
 
 	//Static alt parse, kindof
-	static java.util.List<ObjLangASTNode> ASTNode.patternParse(String pattern, String srcLang) {
+	public static java.util.List<ObjLangASTNode> ASTNode.patternParse(String pattern, String srcLang) {
 		//do altparse things
 		java.util.List<Category> tokens = new ArrayList<Category>();
 		java.util.List<Symbol> symbols = new ArrayList<Symbol>();

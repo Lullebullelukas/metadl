@@ -6,12 +6,12 @@ aspect MatchingEqv {
             //if we have a meta variable then match instantly
             //some shortcuts could probably be taken if we know that numChild differs
 
-            System.out.println("Match is running");
+            // System.out.println("Match is running");
             smallRoot.debugPrint(System.out);
             bigRoot.debugPrint(System.out);
             if (matchHelper(smallRoot, bigRoot, matchMap)) {
                matchMap.put(smallRoot, bigRoot);
-               System.out.println(matchMap);
+            //    System.out.println(matchMap);
                return matchMap;
             } else {
                return Collections.emptyMap();
@@ -29,19 +29,8 @@ aspect MatchingEqv {
                 System.out.println(bigNode.getClass());
                 return false;
             }  
-            // int smallChildren = smallNode.getNumChild();
             int bigChildren = bigNode.getNumChild();
 
-            // System.out.println("big children: " + bigChildren);
-            // System.out.println("small childern: " + smallChildren);
-
-
-            //meta variables have a wrapper making the children amount not be what we want it to. Maybe we can get do a try catch instead
-            //to make sure we don't get index out of bounds.
-            // if (bigChildren != smallChildren) {
-            //     System.out.println("B");
-            //     return false;
-            // }
 
             for(int i = 0; i < bigChildren ; i++) {
                 if(matchHelper(smallNode.getChild(i), bigNode.getChild(i),matchMap)) {
