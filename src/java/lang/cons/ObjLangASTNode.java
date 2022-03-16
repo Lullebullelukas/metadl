@@ -1,6 +1,8 @@
 package lang.cons;
 
 import lang.ast.AnalyzeContext;
+import lang.ast.EquivalenceDecl;
+import java.util.Collection;
 import java.util.TreeSet;
 import java.io.PrintStream;
 import java.util.ArrayList;
@@ -45,6 +47,8 @@ public interface ObjLangASTNode {
 	 */
 	TreeSet<lang.ast.Variable> metavariables();
 	ArrayList<lang.ast.CommonLiteral> literals(AnalyzeContext ctx, lang.ast.CommonVariable root);
+	ArrayList<lang.ast.CommonLiteral> equivLiterals(AnalyzeContext ctx, lang.ast.CommonVariable root, Collection<EquivalenceDecl> decls);
+
 
 	/**
 	   Debug printing

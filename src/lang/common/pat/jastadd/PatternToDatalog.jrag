@@ -22,6 +22,7 @@ import lang.ast.EquivalencePatternDecl;
 import lang.ast.EquivalenceDecl;
 
 
+
 aspect PatternToDatalog {
 
 	/**
@@ -418,24 +419,57 @@ aspect PatternToDatalog {
 		//equivDecls go into decl and pass it to match (first pattern?)
 		//iterator of some sort
 		Iterator<EquivalenceDecl> iter = equivDecls.iterator();
-		EquivalencePatternDecl patternRoot;
+		EquivalencePatternDecl patternRoot= null;
 		if(iter.hasNext()) {
 			patternRoot = iter.next().getEquivalencePatternDecl(0);
 		}
-
+		//needs to be iterated over aswell (nodeList)
 		java.util.List<ObjLangASTNode> nodeList =  lang.ast.ASTNode.patternParse(patternRoot.getPATTERN(),"java8");
 		//gets us a map between patternRoot and root
-		Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>)nodeList.get(0) , oldRoot); 
+		//flip the map K and V?
+		Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>)nodeList.get(0) ,(ASTNode<ASTNode>) this); 
 		//With that map transform the root to MatchNode
 
-		//MatchNode newRoot = appropriate children from map (K,V)
+		//what label should I use?
+		MatchNode newRoot = new MatchNode("Dummy_label");
+		System.out.println(newRoot);
+		System.out.println(this);
+		
 		//traverse old root and replace where K has a V
-		int numChild = oldRoot.getNumChild(); 
-		for(int i = 0; i < numChild; i++) {
-		}
+		buildNewRoot((ASTNode<ASTNode>) this, matchMap);
 
 		literals2(ctx, oldRoot, list);
 		return list;
+	}
+
+	public ASTNode<ASTNode> ASTNode.buildNewRoot(ASTNode<ASTNode> node, Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap) {
+		
+		int numChildren = node.getNumChild();
+		if(numChildren == 0) {
+			if(matchMap.containsKey(node)) {	
+				node = matchMap.get(node);
+				return node;
+			}
+		}
+
+		if (matchMap.containsKey(node)) {
+
+			//discuss this during meeting
+			ASTNode<ASTNode> temp = node.copy();
+			node = matchMap.get(node).copy();
+			int numChildrenTemp = temp.getNumChild();
+			for (int i = 0; i < numChildrenTemp; i++) {
+				node.setChild(node.getChild(i), i);
+			}
+		}
+		
+		for(int i = 0; i < numChildren; i++) {
+			buildNewRoot(node.getChild(i), matchMap);
+		}
+
+		
+		//do something with the matchNode?
+		return node;
 	}
 
 	syn TreeSet<lang.ast.Variable> ASTNode.metavariables() {
