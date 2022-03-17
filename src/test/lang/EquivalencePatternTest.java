@@ -75,11 +75,60 @@ public class EquivalencePatternTest {
         assertEquals(MatchEqv.match(smallRoot, bigRoot),Collections.emptyMap());
     }
 
+
+        @Test public void SimpleTest2() {
+    
+    
+            java.util.List<ObjLangASTNode> list1 = lang.ast.ASTNode.patternParse("`term1 * `term2 * `term3","java8");
+            java.util.List<ObjLangASTNode> list2 = lang.ast.ASTNode.patternParse("1 * 2 * 3","java8");
+            
+            
+            //is list length of one?
+            assertEquals(1, list1.size());
+            assertEquals(1, list2.size());
+    
+            ASTNode<ASTNode> smallRoot = (ASTNode<ASTNode>) list1.get(0);
+            ASTNode<ASTNode> bigRoot = (ASTNode<ASTNode>) list2.get(0);
+    
+           
+            
+            System.out.println(list1);
+            System.out.println(list2);
+            //iterate the list
+            Map<ASTNode<ASTNode>,  ASTNode<ASTNode>> matchMap = MatchEqv.match(smallRoot,bigRoot);
+    
+    
+            //we need to build the actualMap
+            // Map<ASTNode<ASTNode>,  ASTNode<ASTNode>> expectedMap = helpMatch(smallRoot, bigRoot, new HashMap<ASTNode<ASTNode>,  ASTNode<ASTNode>>());
+    
+            
+            // assertEquals(matchMap, expectedMap);
+    
+            System.out.println(matchMap);
+
+            for (ASTNode<ASTNode> node : matchMap.keySet()) {
+                node.debugPrint(System.out);
+                matchMap.get(node).debugPrint(System.out);
+                System.out.println("---------");
+            }
+            // System.out.println(expectedMap);
+    
+            //Make sure that the key maps to the right thing
+    
+            //is the map mapping to the nodes we want it to?
+    
+            //add helper function to refer to them 
+    
+            //cli ./gradlew test  --tests "*DomainSeparation*"
+            
+            
+        }
+
     //helper method to create map between smallRoot and bigRoots
     private Map<ASTNode<ASTNode>,ASTNode<ASTNode>> helpMatch(ASTNode<ASTNode> smallRoot,ASTNode<ASTNode> bigRoot,Map<ASTNode<ASTNode>,ASTNode<ASTNode>> helperMap) {
         int numChildren = bigRoot.getNumChild();
         if(smallRoot.isMetaVar()) {
-            helperMap.put(smallRoot, bigRoot);
+            helperMap.put(bigRoot, smallRoot);
             return helperMap;
         }
 
@@ -87,8 +136,10 @@ public class EquivalencePatternTest {
             helpMatch(smallRoot.getChild(i), bigRoot.getChild(i), helperMap);
         }
 
-        helperMap.put(smallRoot, bigRoot);
+        helperMap.put(bigRoot, smallRoot);
         return helperMap;
     }
+
+
 
 }

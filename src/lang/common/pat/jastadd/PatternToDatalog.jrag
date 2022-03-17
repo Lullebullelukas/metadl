@@ -419,32 +419,42 @@ aspect PatternToDatalog {
 		//equivDecls go into decl and pass it to match (first pattern?)
 		//iterator of some sort
 		Iterator<EquivalenceDecl> iter = equivDecls.iterator();
-		EquivalencePatternDecl patternRoot= null;
+		EquivalencePatternDecl patternRoot = null;
+
 		if(iter.hasNext()) {
-			patternRoot = iter.next().getEquivalencePatternDecl(0);
+			EquivalenceDecl decl = iter.next();
+			//probably needs changing?
+			patternRoot = decl.getEquivalencePatternDecl(0);
+			//needs to be iterated over aswell (nodeList)
+			java.util.List<ObjLangASTNode> nodeList =  lang.ast.ASTNode.patternParse(patternRoot.getPATTERN(),"java8");
+			
+			//TODO : iterate over nodeList
+			//gets us a map between patternRoot and root
+			Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>) nodeList.get(0), (ASTNode<ASTNode>) this); 
+			//ASTNode<ASTNode> newRoot = buildNewRoot((ASTNode<ASTNode>) this, (ASTNode<ASTNode>) nodeList.get(0), matchMap, decl.getLABEL());
+			MatchNode newRoot = new MatchNode(decl.getLABEL(),(ASTNode<ASTNode>) this, matchMap);
+			//ASTNode<ASTNode> copiedTree = this.treeCopy();
+			newRoot.literals2(ctx,oldRoot,list);
 		}
-		//needs to be iterated over aswell (nodeList)
-		java.util.List<ObjLangASTNode> nodeList =  lang.ast.ASTNode.patternParse(patternRoot.getPATTERN(),"java8");
-		//gets us a map between patternRoot and root
-		//flip the map K and V?
-		Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>)nodeList.get(0) ,(ASTNode<ASTNode>) this); 
-		//With that map transform the root to MatchNode
 
-		//what label should I use?
-		MatchNode newRoot = new MatchNode("Dummy_label");
-		System.out.println(newRoot);
-		System.out.println(this);
-		
-		//traverse old root and replace where K has a V
-		buildNewRoot((ASTNode<ASTNode>) this, matchMap);
+		// System.out.println(newRoot);
+		// System.out.println(this);
+		// newRoot.debugPrint(System.out);
+		// this.debugPrint(System.out);
 
-		literals2(ctx, oldRoot, list);
 		return list;
 	}
 
-	public ASTNode<ASTNode> ASTNode.buildNewRoot(ASTNode<ASTNode> node, Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap) {
+
+	// might not be neccessary?
+	// probably circumventable really
+	public ASTNode<ASTNode> ASTNode.buildNewRoot(ASTNode<ASTNode> node, ASTNode<ASTNode> root,Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap, String label) {
 		
-		int numChildren = node.getNumChild();
+	//	int numChildren = node.getNumChild();
+	// do inline?
+		MatchNode newNode = new MatchNode(label, root, matchMap);
+
+		//leaf
 		if(numChildren == 0) {
 			if(matchMap.containsKey(node)) {	
 				node = matchMap.get(node);
@@ -453,10 +463,11 @@ aspect PatternToDatalog {
 		}
 
 		if (matchMap.containsKey(node)) {
-
 			//discuss this during meeting
+			//maybe change this?
 			ASTNode<ASTNode> temp = node.copy();
-			node = matchMap.get(node).copy();
+			// fetch label from equivDecl
+			// node = matchMap.get(node).copy();
 			int numChildrenTemp = temp.getNumChild();
 			for (int i = 0; i < numChildrenTemp; i++) {
 				node.setChild(node.getChild(i), i);
@@ -464,7 +475,7 @@ aspect PatternToDatalog {
 		}
 		
 		for(int i = 0; i < numChildren; i++) {
-			buildNewRoot(node.getChild(i), matchMap);
+			buildNewRoot(node.getChild(i), root, matchMap, label);
 		}
 
 		
@@ -502,16 +513,30 @@ aspect PatternToDatalog {
 	@Override public void MatchNode.literals2(AnalyzeContext ctx, lang.ast.CommonVariable root,
 			java.util.List<lang.ast.CommonLiteral> lits) {
 		
-		ArrayList<lang.ast.Term> vars = new ArrayList<>();
+		TreeSet<lang.ast.Variable> vars = new TreeSet<>(lang.ast.Term.termComparator);
+		Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = matchMap();
 		
+		ArrayList<ASTNode<ASTNode>> keys = new ArrayList<>(matchMap.keySet());
+		System.out.println(keys);
 		//add root vars
-		vars.add(new lang.ast.Variable(varName()));
-		for (int i = 0; i < getNumChild(); ++i) {
-			ASTNode child = getChild(i);
-			vars.add(new lang.ast.Variable(child.varName()));
-			child.literals2(ctx, null, lits);				
+		// prune out root? 
+		for (ASTNode<ASTNode> key : keys) {
+			matchMap.get(key).literals2(ctx, null, lits);
 		}
-		lits.add(literal("EQUIV" + label(), var(varName()), vars));
+
+		//A match node is a synthetic node that has no children, only the matchMap, invoke literals2 through the matchMap instead somehow.
+		
+		//there is an accessable root for MatchNode, maybe pass that through
+		//Use the matchNode relations of the matchMap here, to  
+		// vars.add(new lang.ast.Variable(varName()));
+		// for (int i = 0; i < getNumChild(); ++i) {
+		// 	ASTNode child = getChild(i);
+		// 	vars.add(new lang.ast.Variable(child.varName()));
+		// 	child.literals2(ctx, null, lits);				
+		// }
+		this.debugPrint(System.out);
+		//lits.add(literal("EQUIV_" + label(),vars));
+		lits.add(literal("EQUIV_" + label(),var(root().varName()),var(varName()),var("v_1")));
 		return;
 	}
 
@@ -519,31 +544,28 @@ aspect PatternToDatalog {
 	
 
 	class MatchNode extends ASTNode<ASTNode> {
-	//	private ASTNode<ASTNode> referenceNode; probably needed?
+	//	private ASTNode<ASTNode> referenceNode; probably needed? scrapped
 		private String label;
+		private ASTNode<ASTNode> root;
+		private Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap;
 		
-		public MatchNode(String label){
+		public MatchNode(String label, ASTNode<ASTNode> root, Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap){
 			super();
 			this.label = label;
+			this.root = root;
+			this.matchMap = matchMap;
 		} 
 
 		public String label() {
 			return label;
 		}
 
+		public Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap() {
+			return matchMap;
+		}
 
-		// @Override public void literals2(AnalyzeContext ctx, lang.ast.CommonVariable root,
-		// 	java.util.List<lang.ast.CommonLiteral> lits) {
-
-		// 		List<Variable> vars = new List<>();
-		// 		//add root vars
-		// 		for (int i = 0; i < getNumChild(); ++i) {
-		// 			ASTNode child = getChild(i);
-		// 			vars.add(variable(Child.varName));
-		// 			child.literals2(ctx, null, lits);				
-		// 		}
-		// 		lits.add(literal("EQUIV" + label, var(varName()), vars));
-		// 		return;
-		// }
+		public ASTNode<ASTNode> root() {
+			return root;
+		}
 	}
 }

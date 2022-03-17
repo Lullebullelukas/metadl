@@ -24,7 +24,6 @@ aspect EquivalencePatterns {
 		ArrayList<Clause> ret = new ArrayList<>();
 
 		for (EquivalencePatternDecl epd: getEquivalencePatternDecls()) {
-			//TODO make altparse() static and take a pattern.....
 			Literal body = epd.getLiteralHelper(new Variable("_root"));
 			List<Term> vars = new List<>();
 			for (String s : body.variableNames()) {
@@ -139,10 +138,11 @@ aspect EquivalencePatterns {
 		/*
 		  TODO: generate a literal that represents the equivalence
 		 */
+		headVars.add(new Variable("_root"));
 		
 
 		
-		return new Literal(new PredicateSymbol("Equiv_Pattern_" + getLABEL()), 
+		return new Literal(new PredicateSymbol("EQUIV_PATTERN_" + getLABEL()), 
 							headVars);
 	}
 
