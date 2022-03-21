@@ -138,9 +138,9 @@ aspect EquivalencePatterns {
 		/*
 		  TODO: generate a literal that represents the equivalence
 		 */
-		headVars.add(new Variable("_root"));
 		
-
+		//headvars is not generated at this moment...?
+		//maybe some hashing is needed aswell. duplicates are possible otherwise? 
 		
 		return new Literal(new PredicateSymbol("EQUIV_PATTERN_" + getLABEL()), 
 							headVars);

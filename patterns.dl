@@ -1,0 +1,2639 @@
+// Domains: [[0, 1]]
+// Local terms: [0, 1]
+// AST: true; Global use: false; Global def: false; Local use: true; Local def: true
+.decl A_5_1_2f4faa30ddbed87e634b87af9cae1ac3e38b1032(x_0:number, x_1:number)
+// Domains: [[0, 1]]
+// Local terms: [0, 1]
+// AST: true; Global use: false; Global def: false; Local use: true; Local def: true
+.decl A_5_1_86fef45892c38ce9b12c4a963eb27d7d7a44082a(x_0:number, x_1:number)
+// Domains: [[0]]
+// Local terms: [0]
+// AST: true; Global use: true; Global def: false; Local use: false; Local def: true
+.decl A_5_1_INT(x_0:number, x_1:symbol)
+// Domains: [[1, 3]]
+// Local terms: [1, 3]
+// AST: true; Global use: false; Global def: false; Local use: true; Local def: false
+.decl A_5_1_NTA(x_0:symbol, x_1:number, x_2:number, x_3:number, x_4:symbol)
+// Domains: [[1, 3]]
+// Local terms: [1, 3]
+// AST: true; Global use: true; Global def: false; Local use: true; Local def: true
+.decl A_5_1_PR(x_0:symbol, x_1:number, x_2:number, x_3:number, x_4:symbol)
+// Domains: []
+// Local terms: []
+// AST: false; Global use: true; Global def: false; Local use: true; Local def: true
+.decl A_5_1_SUPERTYPE(x_0:symbol, x_1:symbol)
+// Domains: [[0]]
+// Local terms: []
+// AST: true; Global use: true; Global def: true; Local use: false; Local def: false
+.decl EQUIV_PATTERN_commute_mult(x_0:number)
+// Domains: [[0, 1]]
+// Local terms: [0, 1]
+// AST: true; Global use: true; Global def: false; Local use: false; Local def: true
+.decl EQUIV_commute_mult(x_0:number, x_1:number)
+// Domains: []
+// Local terms: []
+// AST: false; Global use: false; Global def: false; Local use: false; Local def: true
+.decl IMPORT(x_0:symbol, x_1:symbol, x_2:symbol)
+// Domains: []
+// Local terms: []
+// AST: false; Global use: false; Global def: false; Local use: false; Local def: true
+.decl OUTPUT(x_0:symbol, x_1:symbol, x_2:symbol)
+// Domains: []
+// Local terms: []
+// AST: false; Global use: false; Global def: false; Local use: true; Local def: true
+.decl P(x_0:symbol, x_1:symbol)
+// Domains: []
+// Local terms: []
+// AST: true; Global use: false; Global def: true; Local use: false; Local def: false
+.decl P_three_times_two(x_0:symbol)
+// Domains: []
+// Local terms: []
+// AST: false; Global use: false; Global def: false; Local use: true; Local def: true
+.decl Q(x_0:number)
+.output P_three_times_two(IO=file, filename="result.csv", delimiter=",")
+
+.input A_5_1_NTA(filename="A_5_1_NTA.csv", delimiter=",")
+.input A_5_1_PR(filename="A_5_1_PR.csv", delimiter=",")
+IMPORT("'P", "extension/javafiles", "*.java") :- true.
+// Local clause
+// Local variables: []
+// Domains: []
+P("", "") :- 
+	P("", "").
+// AST clause
+// Local clause
+// Local variables: [t_id, w_3_0, n_id]
+// Domains: [[t_id, w_3_0, n_id]]
+A_5_1_INT(n_id, v) :- 
+	A_5_1_PR("LITERAL", t_id, _, _, v),
+	A_5_1_PR("IntegerLiteral", n_id, _, t_id, _).
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Literal", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Literal", "PrimaryExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BooleanLiteral", "BooleanLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BooleanLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CharacterLiteral", "CharacterLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CharacterLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StringLiteral", "StringLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StringLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NullLiteral", "NullLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NullLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntegerLiteral", "IntegerLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntegerLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LongLiteral", "LongLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LongLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FloatingPointLiteral", "FloatingPointLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FloatingPointLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DoubleLiteral", "DoubleLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DoubleLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IllegalLiteral", "IllegalLiteral") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IllegalLiteral", "Literal") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LambdaAnonymousDecl", "LambdaAnonymousDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LambdaAnonymousDecl", "AnonymousDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundMethodAccess", "BoundMethodAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundMethodAccess", "MethodAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundFieldAccess", "BoundFieldAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundFieldAccess", "VarAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundTypeAccess", "BoundTypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundTypeAccess", "TypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BytecodeTypeAccess", "BytecodeTypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BytecodeTypeAccess", "TypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VariableArityParameterDeclaration", "VariableArityParameterDeclaration") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VariableArityParameterDeclaration", "ParameterDeclaration") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntersectionCastExpr", "IntersectionCastExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntersectionCastExpr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TryWithResources", "TryWithResources") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TryWithResources", "TryStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ResourceDeclaration", "ResourceDeclaration") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ResourceDeclaration", "VariableDeclarator") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ResourceModifiers", "ResourceModifiers") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ResourceModifiers", "Modifiers") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorReference", "ConstructorReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorReference", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassReference", "ClassReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassReference", "ConstructorReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayReference", "ArrayReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayReference", "ConstructorReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorReferenceAccess", "ConstructorReferenceAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorReferenceAccess", "ClassInstanceExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParConstructorReferenceAccess", "ParConstructorReferenceAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParConstructorReferenceAccess", "ParClassInstanceExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BasicTWR", "BasicTWR") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BasicTWR", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericMethodDecl", "GenericMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericMethodDecl", "MethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericConstructorDecl", "GenericConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericConstructorDecl", "ConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParMethodDecl", "ParMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParMethodDecl", "MethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawMethodDecl", "RawMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawMethodDecl", "ParMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParConstructorDecl", "ParConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParConstructorDecl", "ConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawConstructorDecl", "RawConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawConstructorDecl", "ParConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParMethodAccess", "ParMethodAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParMethodAccess", "MethodAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParConstructorAccess", "ParConstructorAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParConstructorAccess", "ConstructorAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParSuperConstructorAccess", "ParSuperConstructorAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParSuperConstructorAccess", "SuperConstructorAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParClassInstanceExpr", "ParClassInstanceExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParClassInstanceExpr", "ClassInstanceExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnumDecl", "EnumDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnumDecl", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnumConstant", "EnumConstant") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnumConstant", "BodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnumInstanceExpr", "EnumInstanceExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnumInstanceExpr", "ClassInstanceExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundEnumConstant", "BoundEnumConstant") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BoundEnumConstant", "VarAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StaticImportDecl", "StaticImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StaticImportDecl", "ImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SingleStaticImportDecl", "SingleStaticImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SingleStaticImportDecl", "StaticImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StaticImportOnDemandDecl", "StaticImportOnDemandDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StaticImportOnDemandDecl", "StaticImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnhancedForStmt", "EnhancedForStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EnhancedForStmt", "BranchTargetStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DiamondAccess", "DiamondAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DiamondAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StandInMethodDecl", "StandInMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StandInMethodDecl", "GenericMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NTAFinallyBlock", "NTAFinallyBlock") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NTAFinallyBlock", "Block") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CatchClause", "CatchClause") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BasicCatch", "BasicCatch") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BasicCatch", "CatchClause") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MultiCatch", "MultiCatch") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MultiCatch", "CatchClause") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CatchParameterDeclaration", "CatchParameterDeclaration") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LambdaExpr", "LambdaExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LambdaExpr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LambdaParameters", "LambdaParameters") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InferredParameterDeclaration", "InferredParameterDeclaration") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InferredLambdaParameters", "InferredLambdaParameters") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InferredLambdaParameters", "LambdaParameters") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DeclaredLambdaParameters", "DeclaredLambdaParameters") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DeclaredLambdaParameters", "LambdaParameters") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LambdaBody", "LambdaBody") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BlockLambdaBody", "BlockLambdaBody") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BlockLambdaBody", "LambdaBody") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ExprLambdaBody", "ExprLambdaBody") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ExprLambdaBody", "LambdaBody") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Program", "Program") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CompilationUnit", "CompilationUnit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimitiveCompilationUnit", "PrimitiveCompilationUnit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimitiveCompilationUnit", "CompilationUnit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ImportDecl", "ImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SingleTypeImportDecl", "SingleTypeImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SingleTypeImportDecl", "ImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeImportOnDemandDecl", "TypeImportOnDemandDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeImportOnDemandDecl", "ImportDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Access", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Access", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Dot", "Dot") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Dot", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VarAccess", "VarAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VarAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodAccess", "MethodAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorAccess", "ConstructorAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SuperConstructorAccess", "SuperConstructorAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SuperConstructorAccess", "ConstructorAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeAccess", "TypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimitiveTypeAccess", "PrimitiveTypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimitiveTypeAccess", "TypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayTypeAccess", "ArrayTypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayTypeAccess", "TypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayTypeWithSizeAccess", "ArrayTypeWithSizeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayTypeWithSizeAccess", "ArrayTypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ThisAccess", "ThisAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ThisAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SuperAccess", "SuperAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SuperAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PackageAccess", "PackageAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PackageAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayAccess", "ArrayAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParseName", "ParseName") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParseName", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassInstanceExpr", "ClassInstanceExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassInstanceExpr", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassAccess", "ClassAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeDecl", "TypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ReferenceType", "ReferenceType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ReferenceType", "TypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimitiveType", "PrimitiveType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimitiveType", "TypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NullType", "NullType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NullType", "TypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VoidType", "VoidType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VoidType", "TypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("UnknownType", "UnknownType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("UnknownType", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NumericType", "NumericType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NumericType", "PrimitiveType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BooleanType", "BooleanType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BooleanType", "PrimitiveType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntegralType", "IntegralType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntegralType", "NumericType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ByteType", "ByteType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ByteType", "IntegralType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ShortType", "ShortType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ShortType", "IntegralType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntType", "IntType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IntType", "IntegralType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LongType", "LongType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LongType", "IntegralType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CharType", "CharType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CharType", "IntegralType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FloatingPointType", "FloatingPointType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FloatingPointType", "NumericType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FloatType", "FloatType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FloatType", "FloatingPointType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DoubleType", "DoubleType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DoubleType", "FloatingPointType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassDecl", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassDecl", "ReferenceType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InterfaceDecl", "InterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InterfaceDecl", "ReferenceType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayDecl", "ArrayDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayDecl", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnonymousDecl", "AnonymousDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnonymousDecl", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BodyDecl", "BodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InstanceInitializer", "InstanceInitializer") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InstanceInitializer", "BodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StaticInitializer", "StaticInitializer") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("StaticInitializer", "BodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorDecl", "ConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorDecl", "BodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberDecl", "MemberDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberDecl", "BodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDecl", "FieldDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDecl", "MemberDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VarDeclStmt", "VarDeclStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VarDeclStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Declarator", "Declarator") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VariableDeclarator", "VariableDeclarator") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("VariableDeclarator", "Declarator") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDeclarator", "FieldDeclarator") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDeclarator", "Declarator") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParameterDeclaration", "ParameterDeclaration") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayInit", "ArrayInit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayInit", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodDecl", "MethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodDecl", "MemberDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberTypeDecl", "MemberTypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberTypeDecl", "MemberDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberClassDecl", "MemberClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberClassDecl", "MemberTypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberInterfaceDecl", "MemberInterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MemberInterfaceDecl", "MemberTypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IdUse", "IdUse") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Expr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignExpr", "AssignExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignExpr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignSimpleExpr", "AssignSimpleExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignSimpleExpr", "AssignExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignMultiplicativeExpr", "AssignMultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignMultiplicativeExpr", "AssignExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignMulExpr", "AssignMulExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignMulExpr", "AssignMultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignDivExpr", "AssignDivExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignDivExpr", "AssignMultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignModExpr", "AssignModExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignModExpr", "AssignMultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignAdditiveExpr", "AssignAdditiveExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignAdditiveExpr", "AssignExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignPlusExpr", "AssignPlusExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignPlusExpr", "AssignAdditiveExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignMinusExpr", "AssignMinusExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignMinusExpr", "AssignAdditiveExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignShiftExpr", "AssignShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignShiftExpr", "AssignExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignLShiftExpr", "AssignLShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignLShiftExpr", "AssignShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignRShiftExpr", "AssignRShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignRShiftExpr", "AssignShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignURShiftExpr", "AssignURShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignURShiftExpr", "AssignShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignBitwiseExpr", "AssignBitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignBitwiseExpr", "AssignExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignAndExpr", "AssignAndExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignAndExpr", "AssignBitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignXorExpr", "AssignXorExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignXorExpr", "AssignBitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignOrExpr", "AssignOrExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssignOrExpr", "AssignBitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimaryExpr", "PrimaryExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PrimaryExpr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParExpr", "ParExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParExpr", "PrimaryExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayCreationExpr", "ArrayCreationExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArrayCreationExpr", "PrimaryExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Dims", "Dims") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Unary", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Unary", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PreIncExpr", "PreIncExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PreIncExpr", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PreDecExpr", "PreDecExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PreDecExpr", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MinusExpr", "MinusExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MinusExpr", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PlusExpr", "PlusExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PlusExpr", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BitNotExpr", "BitNotExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BitNotExpr", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LogNotExpr", "LogNotExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LogNotExpr", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CastExpr", "CastExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("CastExpr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PostfixExpr", "PostfixExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PostfixExpr", "Unary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PostIncExpr", "PostIncExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PostIncExpr", "PostfixExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PostDecExpr", "PostDecExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("PostDecExpr", "PostfixExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Binary", "Binary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Binary", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArithmeticExpr", "ArithmeticExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ArithmeticExpr", "Binary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MultiplicativeExpr", "MultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MultiplicativeExpr", "ArithmeticExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MulExpr", "MulExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MulExpr", "MultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DivExpr", "DivExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DivExpr", "MultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ModExpr", "ModExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ModExpr", "MultiplicativeExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AdditiveExpr", "AdditiveExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AdditiveExpr", "ArithmeticExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AddExpr", "AddExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AddExpr", "AdditiveExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SubExpr", "SubExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SubExpr", "AdditiveExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ShiftExpr", "ShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ShiftExpr", "Binary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LShiftExpr", "LShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LShiftExpr", "ShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RShiftExpr", "RShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RShiftExpr", "ShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("URShiftExpr", "URShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("URShiftExpr", "ShiftExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BitwiseExpr", "BitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BitwiseExpr", "Binary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AndBitwiseExpr", "AndBitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AndBitwiseExpr", "BitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("OrBitwiseExpr", "OrBitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("OrBitwiseExpr", "BitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("XorBitwiseExpr", "XorBitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("XorBitwiseExpr", "BitwiseExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LogicalExpr", "LogicalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LogicalExpr", "Binary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AndLogicalExpr", "AndLogicalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AndLogicalExpr", "LogicalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("OrLogicalExpr", "OrLogicalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("OrLogicalExpr", "LogicalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RelationalExpr", "RelationalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RelationalExpr", "Binary") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LTExpr", "LTExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LTExpr", "RelationalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GTExpr", "GTExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GTExpr", "RelationalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LEExpr", "LEExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LEExpr", "RelationalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GEExpr", "GEExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GEExpr", "RelationalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EqualityExpr", "EqualityExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EqualityExpr", "RelationalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EQExpr", "EQExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EQExpr", "EqualityExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NEExpr", "NEExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("NEExpr", "EqualityExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InstanceOfExpr", "InstanceOfExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InstanceOfExpr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConditionalExpr", "ConditionalExpr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConditionalExpr", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Modifiers", "Modifiers") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Modifier", "Modifier") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Stmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BranchTargetStmt", "BranchTargetStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BranchTargetStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Block", "Block") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Block", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EmptyStmt", "EmptyStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("EmptyStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LabeledStmt", "LabeledStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LabeledStmt", "BranchTargetStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ExprStmt", "ExprStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ExprStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SwitchStmt", "SwitchStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SwitchStmt", "BranchTargetStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Case", "Case") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Case", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstCase", "ConstCase") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstCase", "Case") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DefaultCase", "DefaultCase") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DefaultCase", "Case") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IfStmt", "IfStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("IfStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WhileStmt", "WhileStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WhileStmt", "BranchTargetStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DoStmt", "DoStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("DoStmt", "BranchTargetStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ForStmt", "ForStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ForStmt", "BranchTargetStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BreakStmt", "BreakStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BreakStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ContinueStmt", "ContinueStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ContinueStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ReturnStmt", "ReturnStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ReturnStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ThrowStmt", "ThrowStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ThrowStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SynchronizedStmt", "SynchronizedStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SynchronizedStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MonitorExit", "MonitorExit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MonitorExit", "Block") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TryStmt", "TryStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TryStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssertStmt", "AssertStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AssertStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LocalClassDeclStmt", "LocalClassDeclStmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LocalClassDeclStmt", "Stmt") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodReference", "MethodReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodReference", "Expr") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ExprMethodReference", "ExprMethodReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ExprMethodReference", "MethodReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeMethodReference", "TypeMethodReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeMethodReference", "MethodReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AmbiguousMethodReference", "AmbiguousMethodReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AmbiguousMethodReference", "MethodReference") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodReferenceAccess", "MethodReferenceAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodReferenceAccess", "MethodAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParMethodReferenceAccess", "ParMethodReferenceAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParMethodReferenceAccess", "ParMethodAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SyntheticTypeAccess", "SyntheticTypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SyntheticTypeAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnnotationDecl", "AnnotationDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnnotationDecl", "InterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnnotationMethodDecl", "AnnotationMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnnotationMethodDecl", "MethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Annotation", "Annotation") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Annotation", "Modifier") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementValuePair", "ElementValuePair") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementValue", "ElementValue") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementConstantValue", "ElementConstantValue") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementConstantValue", "ElementValue") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementAnnotationValue", "ElementAnnotationValue") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementAnnotationValue", "ElementValue") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementArrayValue", "ElementArrayValue") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ElementArrayValue", "ElementValue") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnnotatedCompilationUnit", "AnnotatedCompilationUnit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AnnotatedCompilationUnit", "CompilationUnit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericClassDecl", "GenericClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericClassDecl", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericInterfaceDecl", "GenericInterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericInterfaceDecl", "InterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParClassDecl", "ParClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParClassDecl", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawClassDecl", "RawClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawClassDecl", "ParClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParInterfaceDecl", "ParInterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParInterfaceDecl", "InterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawInterfaceDecl", "RawInterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("RawInterfaceDecl", "ParInterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParTypeAccess", "ParTypeAccess") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ParTypeAccess", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeVariable", "TypeVariable") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("TypeVariable", "ReferenceType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SubstitutedTypeVariable", "SubstitutedTypeVariable") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SubstitutedTypeVariable", "TypeVariable") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AbstractWildcard", "AbstractWildcard") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AbstractWildcard", "Access") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Wildcard", "Wildcard") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("Wildcard", "AbstractWildcard") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardExtends", "WildcardExtends") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardExtends", "AbstractWildcard") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardSuper", "WildcardSuper") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardSuper", "AbstractWildcard") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AbstractWildcardType", "AbstractWildcardType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("AbstractWildcardType", "TypeDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardType", "WildcardType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardType", "AbstractWildcardType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardExtendsType", "WildcardExtendsType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardExtendsType", "AbstractWildcardType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardSuperType", "WildcardSuperType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardSuperType", "AbstractWildcardType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SubstitutedBodyDecl", "SubstitutedBodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("SubstitutedBodyDecl", "BodyDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodDeclSubstituted", "MethodDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("MethodDeclSubstituted", "MethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericMethodDeclSubstituted", "GenericMethodDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericMethodDeclSubstituted", "GenericMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericMethodDeclErased", "GenericMethodDeclErased") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericMethodDeclErased", "GenericMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorDeclSubstituted", "ConstructorDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ConstructorDeclSubstituted", "ConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericConstructorDeclSubstituted", "GenericConstructorDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericConstructorDeclSubstituted", "GenericConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericConstructorDeclErased", "GenericConstructorDeclErased") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericConstructorDeclErased", "GenericConstructorDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDeclSubstituted", "FieldDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDeclSubstituted", "FieldDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDeclarationSubstituted", "FieldDeclarationSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("FieldDeclarationSubstituted", "FieldDeclarator") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassDeclSubstituted", "ClassDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassDeclSubstituted", "ClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassDeclErased", "ClassDeclErased") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("ClassDeclErased", "ClassDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InterfaceDeclSubstituted", "InterfaceDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("InterfaceDeclSubstituted", "InterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericClassDeclSubstituted", "GenericClassDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericClassDeclSubstituted", "GenericClassDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericClassDeclErased", "GenericClassDeclErased") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericClassDeclErased", "GenericClassDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericInterfaceDeclSubstituted", "GenericInterfaceDeclSubstituted") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GenericInterfaceDeclSubstituted", "GenericInterfaceDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LUBType", "LUBType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("LUBType", "ReferenceType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GLBType", "GLBType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("GLBType", "ReferenceType") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardsCompilationUnit", "WildcardsCompilationUnit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("WildcardsCompilationUnit", "CompilationUnit") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BridgeMethodDecl", "BridgeMethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE("BridgeMethodDecl", "MethodDecl") :- 
+	0 = 0.
+// Local clause
+// Local variables: []
+// Domains: []
+A_5_1_SUPERTYPE(t, s) :- 
+	A_5_1_SUPERTYPE(t, s1),
+	A_5_1_SUPERTYPE(s1, s).
+// AST clause
+// Local clause
+// Local variables: [u, y]
+// Domains: [[u, y]]
+A_5_1_PR(x, y, z, u, w) :- 
+	A_5_1_NTA(x, y, z, u, w).
+// AST clause
+// Global clause
+// Local variables: []
+// Domains: [[w_3_1, `term1, w_3_2], [w_3_3, _e_0, v_3]]
+EQUIV_PATTERN_commute_mult(?term1) :- 
+	A_5_1_SUPERTYPE(?term1_kind, "Expr"),
+	A_5_1_PR(?term1_kind, ?term1, _, _, _),
+	A_5_1_PR(?term1_kind, ?term1, _, _, _),
+	A_5_1_PR(?term1_kind, _e_0, _, _, _),
+	?term1 = _e_0,
+	EQUIV_commute_mult(v_3, _e_0).
+// AST clause
+// Local clause
+// Local variables: [_root, `term1]
+// Domains: [[_root, `term1]]
+EQUIV_commute_mult(_root, ?term1) :- 
+	A_5_1_86fef45892c38ce9b12c4a963eb27d7d7a44082a(_root, ?term1).
+// AST clause
+// Local clause
+// Local variables: [_root, `term1]
+// Domains: [[_root, `term1]]
+EQUIV_commute_mult(_root, ?term1) :- 
+	A_5_1_2f4faa30ddbed87e634b87af9cae1ac3e38b1032(_root, ?term1).
+// AST clause
+// Local clause
+// Local variables: [_root, `term1, t_2_0, w_3_2, v_2, w_3_5]
+// Domains: [[_root, `term1, t_2_0, w_3_2, v_2, w_3_5]]
+A_5_1_86fef45892c38ce9b12c4a963eb27d7d7a44082a(_root, ?term1) :- 
+	A_5_1_PR("MulExpr", _root, 0, ?term1, _),
+	A_5_1_SUPERTYPE(?term1_kind, "Expr"),
+	A_5_1_PR(?term1_kind, ?term1, _, _, _),
+	A_5_1_PR("MulExpr", _root, 1, v_2, _),
+	A_5_1_PR("IntegerLiteral", v_2, 0, t_2_0, _),
+	A_5_1_PR("LITERAL", t_2_0, _, _, "2").
+// AST clause
+// Local clause
+// Local variables: [_root, `term1, v_0, w_3_2, t_0_0, w_3_5]
+// Domains: [[_root, `term1, v_0, w_3_2, t_0_0, w_3_5]]
+A_5_1_2f4faa30ddbed87e634b87af9cae1ac3e38b1032(_root, ?term1) :- 
+	A_5_1_PR("MulExpr", _root, 0, v_0, _),
+	A_5_1_PR("IntegerLiteral", v_0, 0, t_0_0, _),
+	A_5_1_PR("LITERAL", t_0_0, _, _, "2"),
+	A_5_1_PR("MulExpr", _root, 1, ?term1, _),
+	A_5_1_SUPERTYPE(?term1_kind, "Expr"),
+	A_5_1_PR(?term1_kind, ?term1, _, _, _).
+// AST clause
+// Global clause
+// Local variables: []
+// Domains: [[`term1]]
+P_three_times_two(v) :- 
+	/*  `term1 * 2 */EQUIV_PATTERN_commute_mult(?term1),
+	A_5_1_INT(?term1, v).
+// Local clause
+// Local variables: []
+// Domains: []
+Q(0) :- 
+	Q(0).
+OUTPUT("'P_three_times_two", "result.csv", "csv") :- true.

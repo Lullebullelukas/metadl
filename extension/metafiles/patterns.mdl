@@ -3,7 +3,8 @@ IMPORT('P, "extension/javafiles", "*.java").
 P("", "") :- P("", "").
 
 java('P) {
-    commute_mult :: <: `term1 * `term2 :> ~ <: `term2 * `term1:>.
-    P_three_times_two("three_times_two") :- commute_mult : <: 3 * 2 :>.
+    commute_mult :: <: `term1 * 2 :> ~ <: 2 * `term1:>.
+    P_three_times_two(v) :- commute_mult : <: `term1 * 2 :>,INT(`term1, v).
     Q(0) :- Q(0).
 }
+OUTPUT('P_three_times_two,"result.csv", "csv").
