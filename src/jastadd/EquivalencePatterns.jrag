@@ -76,6 +76,21 @@ aspect EquivalencePatterns {
 		return null;
 	}
 
+	protected static String EquivalencePattern.hash(String s) {
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+			byte[] md5 = md.digest(s.getBytes("UTF-8"));
+			StringBuffer sb = new StringBuffer();
+			// Take the first 6 bytes only, to avoid long predicate names
+			for (int i = 0; i < md5.length; i++) {
+				sb.append(String.format("%02x", md5[i]));
+			}
+			return sb.toString();
+		}
+		catch (Exception e) {}
+		return null;
+	}
+
 
 	protected Literal EquivalencePatternDecl.getLiteralHelper(CommonVariable bindVar) {
 		if (enclosingAnalyzeBlock() == null)
@@ -141,8 +156,9 @@ aspect EquivalencePatterns {
 		
 		//headvars is not generated at this moment...?
 		//maybe some hashing is needed aswell. duplicates are possible otherwise? 
-		
-		return new Literal(new PredicateSymbol("EQUIV_PATTERN_" + getLABEL()), 
+		//hashing is not unique due to seeding with a pattern that can be reused
+		//Seeded with node toString instead?
+		return new Literal(new PredicateSymbol("EQUIV_PATTERN_" + getLABEL() + hash(n.toString())), 
 							headVars);
 	}
 
