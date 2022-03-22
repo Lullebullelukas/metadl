@@ -431,58 +431,38 @@ aspect PatternToDatalog {
 			//TODO : iterate over nodeList
 			//gets us a map between patternRoot and root
 			for(ObjLangASTNode node : nodeList) {
-				Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>) node, (ASTNode<ASTNode>) this); 
+				//Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>) node, (ASTNode<ASTNode>) this); 
 				//if map is empty, run match no children, if child matches set that as matchNode root
 				//helper function to recur through children and return the matchNode
-				MatchNode newRoot = new MatchNode(decl.getLABEL(),(ASTNode<ASTNode>) this, matchMap);
-				newRoot.literals2(ctx,oldRoot,list);
+				//Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = matchChild(decl.getLABEL(), (ASTNode<ASTNode>) node, (ASTNode<ASTNode>) this)
+				
+				MatchNode newRoot = matchChild(decl.getLABEL(), (ASTNode<ASTNode>) node, (ASTNode<ASTNode>) this);
+				//MatchNode newRoot = new MatchNode(decl.getLABEL(),(ASTNode<ASTNode>) this, matchMap);
+				if (newRoot == null) {
+					this.literals2(ctx,oldRoot,list);
+				} else {
+					newRoot.literals2(ctx,oldRoot,list);
+				}
 
-				//if 
 			}
-			// Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>) nodeList.get(0), (ASTNode<ASTNode>) this); 
-			// MatchNode newRoot = new MatchNode(decl.getLABEL(),(ASTNode<ASTNode>) this, matchMap);
-			// newRoot.literals2(ctx,oldRoot,list);
 		}
 		return list;
 	}
 
 
-	// might not be neccessary?
-	// probably circumventable really
-	// public ASTNode<ASTNode> ASTNode.buildNewRoot(ASTNode<ASTNode> node, ASTNode<ASTNode> root,Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap, String label) {
+	MatchNode ASTNode.matchChild(String label,ASTNode<ASTNode> smallNode, ASTNode<ASTNode> bigNode) {
 		
-	// //	int numChildren = node.getNumChild();
-	// // do inline?
-	// 	MatchNode newNode = new MatchNode(label, root, matchMap);
-
-	// 	//leaf
-	// 	if(numChildren == 0) {
-	// 		if(matchMap.containsKey(node)) {	
-	// 			node = matchMap.get(node);
-	// 			return node;
-	// 		}
-	// 	}
-
-	// 	if (matchMap.containsKey(node)) {
-	// 		//discuss this during meeting
-	// 		//maybe change this?
-	// 		ASTNode<ASTNode> temp = node.copy();
-	// 		// fetch label from equivDecl
-	// 		// node = matchMap.get(node).copy();
-	// 		int numChildrenTemp = temp.getNumChild();
-	// 		for (int i = 0; i < numChildrenTemp; i++) {
-	// 			node.setChild(node.getChild(i), i);
-	// 		}
-	// 	}
-		
-	// 	for(int i = 0; i < numChildren; i++) {
-	// 		buildNewRoot(node.getChild(i), root, matchMap, label);
-	// 	}
-
-		
-	// 	//do something with the matchNode?
-	// 	return node;
-	// }
+		Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = MatchEqv.match((ASTNode<ASTNode>) smallNode, (ASTNode<ASTNode>) bigNode);
+		if (matchMap.equals(Collections.emptyMap())) {
+			int numChildren = bigNode.getNumChild();
+			for (int i = 0; i < numChildren; i++) {
+				return matchChild(label, smallNode, bigNode.getChild(i));
+			}
+		} else {
+			return new MatchNode(label,bigNode, matchMap);
+		}
+		return null;
+	}
 
 	syn TreeSet<lang.ast.Variable> ASTNode.metavariables() {
 		TreeSet<lang.ast.Variable> vars = new TreeSet<>(lang.ast.Term.termComparator);

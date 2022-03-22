@@ -1,4 +1,4 @@
 class Ints {
-    int var1 = 3 * 2;
-    int var2 = 2 * 5;
+    int var1 = 3 * 2 + 1;
+    int var2 = 1 + 2 * 5;
 }
