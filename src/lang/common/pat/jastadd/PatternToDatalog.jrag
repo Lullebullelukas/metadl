@@ -498,7 +498,7 @@ aspect PatternToDatalog {
 		Map<ASTNode<ASTNode>, ASTNode<ASTNode>> matchMap = matchMap();
 		
 		ArrayList<ASTNode<ASTNode>> keys = new ArrayList<>(matchMap.keySet());
-		System.out.println(keys);
+		// System.out.println(keys);
 		//add root vars
 		lang.ast.Variable[] vars = new lang.ast.Variable[keys.size()+1];
 		vars[0] = var(root().varName());
